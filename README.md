@@ -61,11 +61,12 @@ You can override default table name and pass application id.
 ```
 
 ### callback
-Callback will be called in case of any error.
-    
-##Example
 
-###Default
+Callback will be called in case of any error
+
+## Example
+
+### Default
 
 ```js
 const responseTime = require('response-time')
@@ -75,7 +76,7 @@ app.use(responseTime())
 app.use(requestLogger(sequelizeInstance)
 ```
 
-###Custom
+### Custom
 
 ```js
 const responseTime = require('response-time')
@@ -86,7 +87,7 @@ app.use(requestLogger(sequelizeInstance, { appId: 1 }, (err) => console.log(err)
 
 ```
 
-##License
+## License
 
 [MIT](LICENSE)
 

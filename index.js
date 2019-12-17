@@ -1,20 +1,39 @@
-module.exports = function accessLog(db, error) {
-  return (req, res) => {
-    const { method, originalUrl } = req;
+/**
+ * Request logs.
+ * @param {Object} db - Sequelize database instance.
+ * @param {Object} config - options(appId, tableName).
+ * @param {function} error - error function to be called in case of failure.
+ */
 
-    if (method === 'OPTIONS') return true;
+module.exports = function accessLog(db, config = {}, error) {
+  const { appId = null, tableName = 'access_logs' } = config;
 
-    const log = {
-      response_time: res.get('X-Response-Time').replace('ms', ''),
-      status: res.statusCode,
-      request: originalUrl,
-      method,
-    };
+  return (req, res, next) => {
+    res.on('finish', () => {
+      const { method, originalUrl } = req;
 
-    if (req.user) log.user_id = req.user.id;
+      if (method === 'OPTIONS') return true;
 
-    return db
-      .create(log)
-      .catch(err => error('response logging error', log, err));
+      if (!originalUrl.startsWith('/api')) return true;
+
+      const responseTime = res.get('X-Response-Time').replace('ms', '');
+      const status = res.statusCode;
+      const request = originalUrl;
+
+      const userId = req.user ? req.user.id : null;
+
+      const query = `INSERT INTO ${tableName} (response_time, status, request, method, user_id, app_id) VALUES (${
+          responseTime}, ${status}, '${request}', '${method}', ${userId}, ${appId});`;
+
+      db.query(query, {
+        type: db.QueryTypes.INSERT,
+      })
+          .catch((err) => {
+            if (typeof error === "function") error(err)
+          });
+    });
+
+    next();
   };
 };
+

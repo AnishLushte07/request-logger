@@ -1,19 +1,26 @@
 {
-  "name": "requestlogger",
-  "version": "1.0.0",
-  "description": "",
+  "name": "express-request-logging",
+  "version": "1.0.1",
+  "description": "Express middleware for logging api request in database.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AnishLushte07/requestLogger.git"
+    "url": "git+https://github.com/AnishLushte07/request-logger.git"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "access-log",
+    "request-log",
+    "logging",
+    "api",
+    "express"
+  ],
+  "author": "Anish Lushte",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AnishLushte07/requestLogger/issues"
+    "url": "https://github.com/AnishLushte07/request-logger/issues"
   },
-  "homepage": "https://github.com/AnishLushte07/requestLogger#readme"
+  "homepage": "https://github.com/AnishLushte07/request-logger#readme"
 }

@@ -4,8 +4,8 @@ This logs request url, status and response time to mysql database using sequeliz
 Additional properties `user_id: req.user.id`
 
 ## Prerequisites
-Thins middleware need time taken by request to complete.
-- [Response Time](https://www.npmjs.com/package/response-time) npm install --save response-time
+This middleware need time taken by request to complete.
+- [Response Time](https://www.npmjs.com/package/response-time) `npm install --save response-time`
 
 MYSQL Table Schema (table name is configurable)
 
